@@ -1,0 +1,11 @@
+# ED-II - Estructuras de Datos II
+# Tabla Hash con Doble Hashing y Cursores
+
+# Este proyecto no requiere dependencias externas
+# Solo utiliza la biblioteca estándar de Python 3.7+
+
+# Para desarrollo (opcional):
+# pytest>=7.0.0  # Para ejecutar tests
+# black>=22.0.0  # Para formateo de código
+# flake8>=4.0.0  # Para linting
+
