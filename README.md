@@ -181,38 +181,38 @@ Tabla Hash (m = 11)
 
 ```mermaid
 graph TB
-    subgraph HT["HashTable (m=11)"]
+    subgraph HT["HashTable m=11"]
         direction TB
-        A[table: Array[11]] 
-        B[free_list: cursor]
+        A["table: Array tamaño 11"] 
+        B["free_list: cursor"]
     end
     
     subgraph T0["T[0]"]
-        K0[key: José]
-        V0[value: User]
-        S0[status: OCCUPIED]
-        C0[cursor: 1]
+        K0["key: José"]
+        V0["value: User"]
+        S0["status: OCCUPIED"]
+        C0["cursor: 1"]
     end
     
     subgraph T1["T[1]"]
-        K1[key: Jhuomar]
-        V1[value: User]
-        S1[status: OCCUPIED]
-        C1[cursor: None]
+        K1["key: Jhuomar"]
+        V1["value: User"]
+        S1["status: OCCUPIED"]
+        C1["cursor: None"]
     end
     
     subgraph T5["T[5]"]
-        K5[key: Juan]
-        V5[value: User]
-        S5[status: OCCUPIED]
-        C5[cursor: 4]
+        K5["key: Juan"]
+        V5["value: User"]
+        S5["status: OCCUPIED"]
+        C5["cursor: 4"]
     end
     
     subgraph T4["T[4]"]
-        K4[key: Mateo]
-        V4[value: User]
-        S4[status: OCCUPIED]
-        C4[cursor: 7]
+        K4["key: Mateo"]
+        V4["value: User"]
+        S4["status: OCCUPIED"]
+        C4["cursor: 7"]
     end
     
     A --> T0
@@ -283,34 +283,35 @@ INSERTAR
 
 ```mermaid
 flowchart TD
-    Start([Insertar key, value]) --> Normalize[normalize key → k]
-    Normalize --> H1[Calcular h1 = k mod m]
-    H1 --> Base[Posición base = h1]
-    Base --> Check1{¿T[base] libre?}
+    Start([Insertar key, value]) --> Normalize["normalize key a k"]
+    Normalize --> H1["Calcular h1 = k mod m"]
+    H1 --> Base["Posición base = h1"]
+    Base --> Check1{"¿T[base] libre?"}
     
-    Check1 -->|SÍ| Insert1[Insertar en base]
-    Check1 -->|NO| CheckKey{¿T[base].key == key?}
+    Check1 -->|SÍ| Insert1["Insertar en base"]
+    Check1 -->|NO| CheckKey{"¿T[base].key == key?"}
     
-    CheckKey -->|SÍ| Update[Actualizar T[base].value]
-    CheckKey -->|NO| H2[Calcular h2 = 7 - k mod 7]
+    CheckKey -->|SÍ| Update["Actualizar T[base].value"]
+    CheckKey -->|NO| H2["Calcular h2 = 7 - k mod 7"]
     
-    H2 --> Loop[Iniciar loop i = 1 to m-1]
-    Loop --> Calc[Calcular pos = base + i×h2 mod m]
-    Calc --> Check2{¿T[pos] libre?}
+    H2 --> Loop["Iniciar loop i = 1 to m-1"]
+    Loop --> Calc["Calcular pos = base + i*h2 mod m"]
+    Calc --> Check2{"¿T[pos] libre?"}
     
-    Check2 -->|SÍ| Insert2[Insertar en pos]
-    Check2 -->|NO| CheckKey2{¿T[pos].key == key?}
+    Check2 -->|SÍ| Insert2["Insertar en pos"]
+    Check2 -->|NO| CheckKey2{"¿T[pos].key == key?"}
     
-    CheckKey2 -->|SÍ| Update2[Actualizar T[pos].value]
-    CheckKey2 -->|NO| Next[i = i + 1]
+    CheckKey2 -->|SÍ| Update2["Actualizar T[pos].value"]
+    CheckKey2 -->|NO| Next["i = i + 1"]
     Next --> Loop
     
-    Insert1 --> UpdateCursor[Actualizar cursores si i > 0]
+    Insert1 --> UpdateCursor["Actualizar cursores si i > 0"]
     Insert2 --> UpdateCursor
-    UpdateCursor --> Success[✓ Éxito]
+    UpdateCursor --> Success["Éxito"]
     Update --> Success
+    Update2 --> Success
     
-    Loop -->|i == m| Full[✗ Tabla llena]
+    Loop -->|i == m| Full["Tabla llena"]
     
     style Start fill:#e1f5ff
     style Success fill:#d4edda
